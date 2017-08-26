@@ -11,6 +11,8 @@ var env = process.env.NODE_ENV || 'development';
 
 var outputDir = 'builds/development';
 
+var jsDirectory = 'src/js';
+
 gulp.task('jade',function(){
 	return gulp.src('src/templates/**/*.jade')
 	.pipe(jade())
@@ -18,7 +20,7 @@ gulp.task('jade',function(){
 });
 
 gulp.task('js',function(){
-	return gulp.src('src/js/main.js')
+	return gulp.src(jsDirectory + '/**/*.js')
 	.pipe(browserify({debug: env === 'development'}))
 	.pipe(gulpif(env === 'production' , uglify()))
 	.pipe(gulp.dest(outputDir + '/js'));
